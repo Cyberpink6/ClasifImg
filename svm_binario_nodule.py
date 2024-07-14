@@ -91,27 +91,3 @@ plt.xlabel('Métrica')
 plt.ylabel('Valor')
 plt.title('Métricas de Evaluación')
 plt.show()
-
-
-
-"""##Cross Validation"""
-
-y = np.array(['Pneumonia', 'No Finding']) # Asegúrate de tener tus etiquetas en un formato adecuado
-
-# Define tu modelo de aprendizaje automático
-modelo = SVC(kernel='linear', C=1)
-
-# Define el número de pliegues (folds) para la validación cruzada
-num_folds = 5
-
-# Realiza la validación cruzada
-kf = KFold(n_splits=num_folds, shuffle=True, random_state=42)
-resultados = cross_val_score(modelo, data, y=None, cv=kf)
-
-# Imprime los resultados obtenidos en cada fold
-for i, resultado in enumerate(resultados):
-    print(f"Fold {i+1}: {resultado}")
-
-# Calcula y muestra el promedio de los resultados
-promedio_resultados = resultados.mean()
-print(f"Promedio de resultados: {promedio_resultados}")
