@@ -151,7 +151,7 @@ model.add(Dense(33, activation=act))
 model.add(Dropout(drop))
 model.add(Dense(2, activation='sigmoid', name = 'Output_Layer'))
 # compile model
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 # Callback para guardar el modelo con la mejor precisión
 early_stopping = EarlyStopping(monitor='val_accuracy', verbose = 1, patience=3, min_delta = 0.005, mode='max')
