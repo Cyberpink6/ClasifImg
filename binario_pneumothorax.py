@@ -151,7 +151,7 @@ model.add(Dense(33, activation=act))
 model.add(Dropout(drop))
 model.add(Dense(2, activation='sigmoid', name = 'Output_Layer'))
 # compile model
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 # Callback para guardar el modelo con la mejor precisión
 early_stopping = EarlyStopping(monitor='val_accuracy', verbose = 1, patience=3, min_delta = 0.005, mode='max')
@@ -170,82 +170,9 @@ for epoch in range(1):
     print("Epoch {}/{}".format(epochs, epochs))
     loss, accuracy = model.evaluate(X_test, y_test, verbose=1)
 
-# Entrenamiento del modelo big
-model = Sequential()
-model.add(Conv2D(64, kernel_size=(3,3),activation=act, input_shape = inp_shape,
-               kernel_regularizer = kernal_reg,
-               kernel_initializer = 'he_uniform',  padding = 'same', name = 'Input_Layer'))
-model.add(Dense(64, activation=act))
-model.add(MaxPooling2D(pool_size=(2, 2),  strides = (2,2)))
-
-model.add(Conv2D(64, (3, 3), activation=act, kernel_regularizer = kernal_reg, dilation_rate = dil_rate,
-               kernel_initializer = 'he_uniform',padding = 'same'))
-model.add(Dense(64, activation=act))
-model.add(MaxPooling2D(pool_size=(2, 2), strides = (2,2)))
-
-model.add(Conv2D(128, (3, 3), activation=act, kernel_regularizer = kernal_reg, dilation_rate = dil_rate,
-               kernel_initializer = 'he_uniform',padding = 'same'))
-model.add(Conv2D(128, (3, 3), activation=act, kernel_regularizer = kernal_reg, dilation_rate = dil_rate,
-               kernel_initializer = 'he_uniform',padding = 'same'))
-model.add(MaxPooling2D(pool_size=(2, 2), strides = (2,2)))
-model.add(Flatten())
-model.add(Dense(128, activation=act))
-model.add(Dense(64, activation=act))
-model.add(Dense(33, activation=act))
-model.add(Dropout(drop))
-model.add(Dense(4, activation='softmax', name = 'Output_Layer'))
-# compile model
-model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
-
-# Entrenamiento del modelo mid
-model = Sequential()
-
-model.add(Conv2D(64, kernel_size=(3,3),activation=act, input_shape = inp_shape,
-                     kernel_regularizer = kernal_reg,
-                     kernel_initializer = 'he_uniform',  padding = 'same', name = 'Input_Layer'))
-model.add(Dense(64, activation = 'relu'))
-model.add(MaxPooling2D(pool_size=(2, 2),  strides = (2,2)))
-
-model.add(Conv2D(64, (3, 3), activation=act, kernel_regularizer = kernal_reg, dilation_rate = dil_rate,
-                     kernel_initializer = 'he_uniform',padding = 'same'))
-model.add(Dense(64, activation = 'relu'))
-model.add(MaxPooling2D(pool_size=(2, 2), strides = (2,2)))
-
-model.add(Conv2D(128, (3, 3), activation=act, kernel_regularizer = kernal_reg, dilation_rate = dil_rate,
-                     kernel_initializer = 'he_uniform',padding = 'same'))
-model.add(Conv2D(128, (3, 3), activation=act, kernel_regularizer = kernal_reg, dilation_rate = dil_rate,
-                     kernel_initializer = 'he_uniform',padding = 'same'))
-model.add(MaxPooling2D(pool_size=(2, 2), strides = (2,2)))
-model.add(Flatten())
-model.add(Dense(128, activation='relu'))
-model.add(Dense(64, activation='relu'))
-model.add(Dense(32, activation='relu'))
-model.add(Dropout(drop))
-model.add(Dense(3, activation='sigmoid', name = 'Output_Layer'))
-model.compile(loss = 'categorical_crossentropy', optimizer = 'adam', metrics = ['accuracy'])
-
-
-# Entrenamiento del modelo small
-model = Sequential()
-model.add(Conv2D(64, kernel_size=(3, 3), activation=act, input_shape=inp_shape, kernel_initializer='he_uniform', padding='same', name='Input_Layer'))
-model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
-
-model.add(Conv2D(64, (3, 3), activation=act, kernel_initializer='he_uniform', padding='same'))
-model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
-
-model.add(Conv2D(128, (3, 3), activation=act, kernel_initializer='he_uniform', padding='same'))
-model.add(MaxPooling2D(pool_size=(2, 2), strides=(2, 2)))
-
-model.add(Flatten())
-model.add(Dense(128, activation=act))
-model.add(Dropout(drop))
-model.add(Dense(2, activation='sigmoid', name='Output_Layer'))
-
-model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-
 """##Guardar el modelo"""
 
-model.save('modelo_binario_pneumonia.h5')
+model.save('modelo_binario_pneumothorax.h5')
 
 """##Imprimir la gráfica de Entropia Cruzada"""
 
